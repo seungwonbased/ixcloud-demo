@@ -68,9 +68,9 @@ IXcloud 존: CloudR1, CloudR2 있음
 ssh -i ix-db-key-pair.pem ubuntu@1.201.166.28
 ```
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ WARNING: UNPROTECTED PRIVATE KEY FILE! @
-@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 Permissions 0644 for 'ix-db-key-pair.pem' are too open.
 It is required that your private key files are NOT accessible by others.
 This private key will be ignored. 
