@@ -400,18 +400,18 @@ spec:
 
 ### 테스트
 
-![https://github.com/seungwonbased/ixcloud-demo/blob/main/assets/1.png]
-![https://github.com/seungwonbased/ixcloud-demo/blob/main/assets/2.png]
+![](https://github.com/seungwonbased/ixcloud-demo/blob/main/assets/1.png)
+![](https://github.com/seungwonbased/ixcloud-demo/blob/main/assets/2.png)
 - NodePort로 열어둔 주소에 접속
 - 테스트 데이터 전송
 
-![https://github.com/seungwonbased/ixcloud-demo/blob/main/assets/3.png]
+![](https://github.com/seungwonbased/ixcloud-demo/blob/main/assets/3.png)
 - 통신 성공
 
-![https://github.com/seungwonbased/ixcloud-demo/blob/main/assets/4.png]
+![](https://github.com/seungwonbased/ixcloud-demo/blob/main/assets/4.png)
 - 백엔드 로그
 
-![https://github.com/seungwonbased/ixcloud-demo/blob/main/assets/5.png]
+![](https://github.com/seungwonbased/ixcloud-demo/blob/main/assets/5.png)
 - DB 인스턴스 접속 후 프롬프트로 데이터 확인
 
 ### 성공!!! 🎉
