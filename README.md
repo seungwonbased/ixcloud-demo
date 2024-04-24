@@ -69,11 +69,17 @@ ssh -i ix-db-key-pair.pem ubuntu@1.201.166.28
 ```
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 @ WARNING: UNPROTECTED PRIVATE KEY FILE! @
+
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 Permissions 0644 for 'ix-db-key-pair.pem' are too open.
+
 It is required that your private key files are NOT accessible by others.
+
 This private key will be ignored. 
+
 Load key "ix-db-key-pair.pem": 
 bad permissions [ubuntu@1.201.166.28](mailto:ubuntu@1.201.166.28): Permission denied (publickey).
 
