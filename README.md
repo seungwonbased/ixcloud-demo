@@ -10,6 +10,7 @@
 ### 실습 목표
 
 - IXcloud IKS(쿠버네티스 서비스)에 3-Tier 아키텍처 배포
+- Frontend (Client) - Backend (Application) - Database (Data)
 
 ### 프로젝트 생성
 
