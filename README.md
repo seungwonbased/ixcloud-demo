@@ -68,22 +68,18 @@ IXcloud 존: CloudR1, CloudR2 있음
 ssh -i ix-db-key-pair.pem ubuntu@1.201.166.28
 ```
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@
-
+```
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ WARNING: UNPROTECTED PRIVATE KEY FILE! @
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 Permissions 0644 for 'ix-db-key-pair.pem' are too open.
-
 It is required that your private key files are NOT accessible by others.
-
 This private key will be ignored. 
-
 Load key "ix-db-key-pair.pem": 
 bad permissions [ubuntu@1.201.166.28](mailto:ubuntu@1.201.166.28): Permission denied (publickey).
+```
 
-→ 이런 메세지가 뜸
+→ 이런 메세지가 발생
 
 - SSH 키 파일의 권한 설정이 너무 널널하게 설정되어 있어서 발생
 - SSH 키 파일은 보안상의 이유로 다른 사용자에게 읽히거나 수정될 수 없어야 함
@@ -252,7 +248,6 @@ cat ~/.kube/config
 ```
 
 → - cluster, - context, - name 복사
-
 - 로컬 머신의 kubeconfig 수정
 
 ```bash
@@ -260,9 +255,7 @@ vi ~./kube/config
 ```
 
 → - cluster, - context, - name 수정
-
 → - cluster의 server 부분 커넥터 노드 IP로 변경!!!
-
 - 로컬 머신의 kubectl 컨텍스트 전환
 
 ```bash
@@ -428,3 +421,26 @@ spec:
 - DB 인스턴스 접속 후 프롬프트로 데이터 확인
 
 ### 성공!!! 🎉
+
+### 여러 이슈
+
+1. CloudR1에서 쿠버네티스가 사용 불가능
+    - 매뉴얼에도 이 내용을 찾을 수 없었음 (내가 못찾은 것일 수도 있음)
+    - 그래서 처음부터 다시 함
+2. DB 인스턴스 생성 후 SSH 접속 시 오류
+    - 키 페어의 권한이 너무 널널했음
+    - chmod 600 (소유자의 읽기 및 쓰기) 명령으로 해결
+3. DB 서버 구축
+    - AWS RDS에 비교하면, 직접 DB 서버를 설치해야 하니 설정해야 할 것이 더 많았음
+    - PostgreSQL의 설정 파일에서 Listen addresses를 바꾸거나, Local connections도 설정해줌
+4. 쿠버네티스의 kubectl 도구를 로컬에 구성
+    - AWS CLI와 같은 도구 없이 직접 원격 kubectl을 구성하기 위해 마스터 노드에 SSH 접속 후 kubeconfig 파일을 다운로드 받아 로컬에 직접 구성 후 컨텍스트 스위치해 사용
+5. 백엔드 애플리케이션을 클러스터에 배포 시 ErrImagePull 발생
+    - 처음에는 보안 그룹 문제인가 싶어서 확인해보니 egress 트래픽이 모두 열려있었고, 이미지를 Pull 해오는 것은 HTTPS(443)를 사용할테니 문제 없었음
+    - 로컬 머신이 ARM 아키텍처의 맥이라 클러스터와 호환되지 않았던 것
+        - —platform linux/AMD64 플래그로 x86에 맞게 리빌드
+6. CORS 오류
+    - 분명 백엔드 애플리케이션에서 CORS 허용을 해놓았는데, CORS 오류 발생
+    - 프론트엔드 애플리케이션 개발 시 URL 끝에 슬래시를 붙이지 않아 Redirect 됨
+        - Preflight Request가 적절히 처리되지 않았기 때문
+    - 애플리케이션 코드 내 URL 끝에 슬래시를 붙여 해결
