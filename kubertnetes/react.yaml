@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-react
+spec:
+  selector:
+    matchLabels:
+      app: react
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: react
+    spec:
+      containers:
+      - name: ix-react
+        image: docker.io/seungwonbased/ix-react:4.0
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-react
+spec:
+  selector:
+    app: react
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+    nodePort: 30001
+  type: NodePort
